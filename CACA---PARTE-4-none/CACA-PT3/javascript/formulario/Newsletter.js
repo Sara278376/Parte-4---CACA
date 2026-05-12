@@ -1,13 +1,12 @@
-// ─── newsletter.js ───────────────────────────────────────────────────────────
 // Gestão de subscrições de newsletter com IndexedDB
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 const NL_DB_NOME    = 'cacaNewsletter';
 const NL_DB_VERSAO  = 1;
 const NL_STORE      = 'subscritores';
 let   nlDb          = null;
 
-// ── Inicialização da IndexedDB ────────────────────────────────────────────────
+// Inicialização da IndexedDB 
 
 /**
  * Abre (ou cria) a base de dados IndexedDB para a newsletter.
@@ -123,7 +122,7 @@ function nlMostrarFeedback(texto, tipo) {
     }
 }
 
-// ── Ação principal: submeter formulário ──────────────────────────────────────
+// Ação principal: submeter formulário 
 
 /**
  * Lê, valida e persiste os dados do formulário de newsletter.
@@ -136,7 +135,7 @@ async function nlSubmeter() {
     const nome  = nomeEl  ? nomeEl.value.trim()  : '';
     const email = emailEl ? emailEl.value.trim()  : '';
 
-    // ── Validação de campos ───────────────────────────────────────────────────
+    // Validação de campos 
     if (!nlValidarNome(nome)) {
         nlMostrarFeedback('❌ Introduz um nome válido (mínimo 2 caracteres).', 'erro');
         nomeEl && nomeEl.focus();
@@ -149,7 +148,7 @@ async function nlSubmeter() {
         return;
     }
 
-    // ── Verificar duplicado ───────────────────────────────────────────────────
+    //Verificar duplicado
     try {
         const jaExiste = await nlEmailExiste(email);
         if (jaExiste) {
@@ -162,7 +161,7 @@ async function nlSubmeter() {
         return;
     }
 
-    // ── Guardar na IndexedDB ──────────────────────────────────────────────────
+    // Guardar na IndexedDB 
     const subscritor = {
         nome,
         email,
@@ -188,7 +187,7 @@ async function nlSubmeter() {
     }
 }
 
-// ── Inicialização ─────────────────────────────────────────────────────────────
+// Inicialização
 
 /**
  * Inicializa a IndexedDB da newsletter quando o DOM estiver pronto.
