@@ -35,7 +35,7 @@ function nlAbrirDB() {
     });
 }
 
-// ── Operações CRUD ────────────────────────────────────────────────────────────
+// Operações CRUD 
 
 /**
  * Wrapper genérico para operações na IndexedDB.
@@ -77,7 +77,7 @@ function nlEmailExiste(email) {
     });
 }
 
-// ── Validação ─────────────────────────────────────────────────────────────────
+// Validação 
 
 /**
  * Valida o formato do e-mail com expressão regular.
@@ -97,7 +97,7 @@ function nlValidarNome(nome) {
     return nome.trim().length >= 2;
 }
 
-// ── Feedback ao utilizador ────────────────────────────────────────────────────
+// Feedback ao utilizador 
 
 /**
  * Mostra uma mensagem de feedback na secção da newsletter.
