@@ -61,43 +61,50 @@ export default function Gestao_eventos() {
       });
   }, []);
 
-  const carregarERenderizarEventos = async () => {
+  /**
+   * Ordena os dados recebidos por data e atualiza o estado dos eventos
+   * @param {Array} dados - Lista de eventos a ordenar
+   */
+  async function carregarERenderizarEventos() {
     const dados = await geListarEventos();
     dados.sort((a, b) => a.data.localeCompare(b.data));
     setEventos(dados);
-  };
+  }
 
-  const handleInputChange = (e) => {
+  function handleInputChange(e) {
     const { name, value } = e.target;
     setFormDados(prev => ({ ...prev, [name]: value }));
-  };
+  }
 
-  const handleGuardarEvento = async (e) => {
+  /**
+   * Valida as restrições do formulário e submete um novo evento
+   * @param {Event} e - Evento de submissão do formulário
+   */
+  async function handleGuardarEvento(e) {
     e.preventDefault();
     const { titulo, descricao, data, hora, local } = formDados;
 
     if (!titulo || !descricao || !data || !hora || !local) {
-      setFeedbackMsg({ texto: 'Preenche todos os campos obrigatórios.', classe: 'ge-erro' });
-      return;
+        setFeedbackMsg({ texto: 'Preenche todos os campos obrigatórios.', classe: 'ge-erro' });
     }
-
-    const hoje = new Date().toISOString().split('T')[0];
-    if (data < hoje) {
-      setFeedbackMsg({ texto: 'A data do evento deve ser hoje ou uma data futura.', classe: 'ge-erro' });
-      return;
+    else if (data < new Date().toISOString().split('T')[0]) {
+        setFeedbackMsg({ texto: 'A data do evento deve ser hoje ou uma data futura.', classe: 'ge-erro' });
     }
+    else {
+        await geAdicionarEvento({ titulo, descricao, data, hora, local });
+        setFeedbackMsg({ texto: '✅ Evento adicionado com sucesso!', classe: 'ge-sucesso' });
+        
+        setFormDados({ titulo: '', descricao: '', data: '', hora: '', local: '' });
+        setCacheGeo(null);
+        carregarERenderizarEventos();
 
-    await geAdicionarEvento({ titulo, descricao, data, hora, local });
-    setFeedbackMsg({ texto: '✅ Evento adicionado com sucesso!', classe: 'ge-sucesso' });
-    
-    setFormDados({ titulo: '', descricao: '', data: '', hora: '', local: '' });
-    setCacheGeo(null);
-    carregarERenderizarEventos();
+        setTimeout(function() {
+          setFeedbackMsg({ texto: '', classe: '' });
+        }, 3000);
+    }
+  }
 
-    setTimeout(() => setFeedbackMsg({ texto: '', classe: '' }), 3000);
-  };
-
-  const handlePesquisarLocal = async () => {
+  async function handlePesquisarLocal() {
     const { local, data: dataEvento, hora, titulo } = formDados;
 
     if (!local.trim()) {
@@ -167,15 +174,17 @@ export default function Gestao_eventos() {
       setFeedbackMsg({ texto: '❌ ' + err.message, classe: 'ge-erro' });
       setMeteoDados(prev => ({ ...prev, carregando: false }));
     }
-  };
+  }
 
-  const handleEliminarEvento = async (id) => {
+  async function handleEliminarEvento(id) {
     if (!window.confirm('Tens a certeza que queres remover este evento?')) return;
     await geRemoverEvento(id);
     setFeedbackMsg({ texto: 'Evento removido.', classe: 'ge-sucesso' });
     carregarERenderizarEventos();
-    setTimeout(() => setFeedbackMsg({ texto: '', classe: '' }), 3000);
-  };
+    setTimeout(function() {
+      setFeedbackMsg({ texto: '', classe: '' });
+    }, 3000);
+  }
 
   return (
     <header>

@@ -1,5 +1,28 @@
 import { useState } from 'react';
 import './Contactos.css';
+import { countries } from './media/data/paises';
+
+/**
+ * A função verifica se o email está num formato aceitavel
+ * através de um regex, no qual verifica se
+ * tem um texto de inicio, um @(algo).com
+ * @param {string} email 
+ * @returns boolean
+ */
+function validateEmail(email) {
+  return email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g);
+}
+
+/**
+ * A função verifica se o número de telefone está num formato
+ * valido
+ * @param {string} phone 
+ * @returns boolean
+ */
+function validatePhone(phone) {
+    const digitos = phone.replace(/[\s\-\(\)\+]/g, '').trim();
+    return /^\d{7,15}$/.test(digitos);
+}
 
 export default function Contactos() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,22 +38,23 @@ export default function Contactos() {
     mensagem: ''
   });
 
-  const paisesLista = [
-    { nome: 'United Kingdom', prefixo: '+44', flag: 'flag:gb-4x3' },
-    { nome: 'United States', prefixo: '+1', flag: 'flag:us-4x3' },
-    { nome: 'Portugal', prefixo: '+351', flag: 'flag:pt-4x3' }
-  ];
-
   const handleInputChange = (e) => {
     const { id, name, value } = e.target;
     const key = id || name;
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
-  const selectQuickMessage = (e) => {
-    const value = e.target.value;
-    if (value) {
-      setForm(prev => ({ ...prev, mensagem: value }));
+  /**
+   * @param {object} e - evento de mudança do select
+   */
+  const selectQuickMessage = (e) => { // Modificado de forma a aceder ao element chamado, em vez de utilizar getElementById
+    const quickMessageEl = e.target;
+    
+    if (quickMessageEl.value) {
+      setForm(prev => ({ 
+        ...prev, 
+        mensagem: quickMessageEl.value 
+      }));
     }
   };
 
@@ -41,20 +65,50 @@ export default function Contactos() {
     setSearchQuery('');
   };
 
+  /**
+   * A função verifica se o utilizador tem todos os parametros do formulário preenchidos, estes sendo
+   * o nome, email e mensagem. Em caso de falha é exposto no ecrã uma mensagem de erro, indicando o
+   * parametro não preenchido ou inválido. Caso estejam em um formato aceitavel, é exposto ao
+   * utiliador uma mensagem de sucesso
+   */
   const handleSendEmail = () => {
-    if (!form.nome || !form.email || !form.mensagem) {
-      setStatusMsg({ visivel: true, texto: 'Erro ao enviar mensagem', erro: true });
-      setTimeout(() => setStatusMsg(prev => ({ ...prev, visivel: false })), 3000);
-      return;
+    if (form.nome == ""){
+        setStatusMsg({ visivel: true, texto: "Erro: Nome inválido", erro: true });
+        setTimeout(function(){
+          setStatusMsg(prev => ({ ...prev, visivel: false }));
+        } , 3000);
+    }
+    
+    else if (form.email == "" || !validateEmail(form.email)){
+        setStatusMsg({ visivel: true, texto: "Erro: Email Inválido", erro: true });
+        setTimeout(function(){
+          setStatusMsg(prev => ({ ...prev, visivel: false }));
+        } , 3000);
+    }
+    else if (form.mensagem == ""){
+        setStatusMsg({ visivel: true, texto: "Erro: Mensagem vazia", erro: true });
+        setTimeout(function(){
+          setStatusMsg(prev => ({ ...prev, visivel: false }));
+        } , 3000);
     }
 
-    setStatusMsg({ visivel: true, texto: 'Mensagem enviada com sucesso', erro: false });
-    setForm({ nome: '', email: '', tel: '', mensagem: '' });
-    setTimeout(() => setStatusMsg(prev => ({ ...prev, visivel: false })), 3000);
+    else if (!validatePhone(form.tel)){
+        setStatusMsg({ visivel: true, texto: "Erro: Telefone Inválido", erro: true });
+        setTimeout(function(){
+          setStatusMsg(prev => ({ ...prev, visivel: false }));
+        } , 3000);
+    }
+    else{
+        setStatusMsg({ visivel: true, texto: "Mensagem enviada com sucesso", erro: false });
+        setForm({ nome: '', email: '', tel: '', mensagem: '' });
+        setTimeout(function(){
+          setStatusMsg(prev => ({ ...prev, visivel: false }));
+        } , 3000);
+    }
   };
 
-  const paisesFiltrados = paisesLista.filter(p =>
-    p.nome.toLowerCase().includes(searchQuery.toLowerCase())
+  const paisesFiltrados = countries.filter(p =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -88,12 +142,12 @@ export default function Contactos() {
                     <input type="text" className="search-box" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search Country Name" />
                     <ol>
                       {paisesFiltrados.map((p, idx) => (
-                        <li key={idx} className="option" onClick={() => handleSelectCountry(p.prefixo, p.flag)}>
+                        <li key={idx} className="option" onClick={() => handleSelectCountry(`+${p.phone}`, `flag:${p.code.toLowerCase()}-4x3`)}>
                           <div>
-                            <span className="iconify" data-icon={p.flag}></span>
-                            <span className="country-name">{p.nome}</span>
+                            <span className="iconify" data-icon={`flag:${p.code.toLowerCase()}-4x3`}></span>
+                            <span className="country-name">{p.name}</span>
                           </div>
-                          <strong>{p.prefixo}</strong>
+                          <strong>+{p.phone}</strong>
                         </li>
                       ))}
                       {paisesFiltrados.length === 0 && (

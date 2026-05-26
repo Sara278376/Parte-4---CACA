@@ -6,7 +6,6 @@ function App() {
     <div className="App">
       <main style={{ minHeight: '250vh', padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
         <h2>Centro Académico Clínico dos Açores</h2>
-        <p>Área de desenvolvimento e testes.</p>
       </main>
 
       <Gestao_eventos />

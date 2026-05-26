@@ -3,7 +3,7 @@ const NL_DB_VERSAO  = 1;
 const NL_STORE      = 'subscritores';
 let nlDb            = null;
 
-export function abrirNewsletterDB() {
+export function abrirNewsletterDB() { // Criação base dados e tabelas
     return new Promise((resolve, reject) => {
         if (nlDb) return resolve(nlDb);
         const pedido = indexedDB.open(NL_DB_NOME, NL_DB_VERSAO);
@@ -24,7 +24,7 @@ export function abrirNewsletterDB() {
     });
 }
 
-function newsletterIdbOp(mode, fn) {
+function newsletterIdbOp(mode, fn) { // Acesso a tablea para newsletter
     return abrirNewsletterDB().then(() => {
         return new Promise((resolve, reject) => {
             const tx  = nlDb.transaction(NL_STORE, mode);
@@ -35,11 +35,11 @@ function newsletterIdbOp(mode, fn) {
     });
 }
 
-export function adicionarSubscritor(subscritor) {
+export function adicionarSubscritor(subscritor) { // Adicionar subscritor newsletter
     return newsletterIdbOp('readwrite', store => store.add(subscritor));
 }
 
-export function verificarEmailExiste(email) {
+export function verificarEmailExiste(email) { // Validação email
     return abrirNewsletterDB().then(() => {
         return new Promise((resolve, reject) => {
             const tx    = nlDb.transaction(NL_STORE, 'readonly');
@@ -84,25 +84,24 @@ function geIdbOp(mode, fn) {
     });
 }
 
+// Operações com bases de dados
 export function geListarEventos() {
     return geIdbOp('readonly', store => store.getAll());
 }
-
 export function geAdicionarEvento(evento) {
     return geIdbOp('readwrite', store => store.add(evento));
 }
-
 export function geRemoverEvento(id) {
     return geIdbOp('readwrite', store => store.delete(id));
 }
-
 export function geAtualizarEvento(evento) {
     return geIdbOp('readwrite', store => store.put(evento));
 }
-
 export function geObterEvento(id) {
     return geIdbOp('readonly', store => store.get(id));
 }
+
+//  Geocodificação — Nominatim (OpenStreetMap)
 
 export async function geGeocodificar(local) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(local)}&limit=1`;
