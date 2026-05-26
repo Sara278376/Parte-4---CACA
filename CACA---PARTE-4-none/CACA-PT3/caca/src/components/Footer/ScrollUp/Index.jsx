@@ -1,45 +1,53 @@
-import { useState, useEffect } from 'react';
-import '../Footer.css';
-import FormularioNewsletter from '../Formulario_newsletter/Index';
-import Contactos from '../Contactos/Index';
+import { useEffect, useRef } from 'react';
+import './ScrollUp.css';
 
-export default function Footer() {
-  const [showScrollBtn, setShowScrollBtn] = useState(false);
+export default function ScrollUp() {
+  const btnScrollRef = useRef(null);
 
   /**
    * Controla a visibilidade de um elemento com base na posição do scroll
+   * @param {HTMLElement} elemento - O elemento a mostrar/esconder
    * @param {number} distancia - A distância em pixels do topo
    */
-  useEffect(() => {
-    const handleScroll = () => {
-      if (document.documentElement.scrollTop > 150) {
-        setShowScrollBtn(true);
+  function atualizarVisibilidadeScroll(elemento, distancia) {
+      if (document.documentElement.scrollTop > distancia) {
+          elemento.style.display = "block";
       } else {
-        setShowScrollBtn(false);
+          elemento.style.display = "none";
       }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }
 
   /**
    * Esta função faz um scroll suave até ao topo da página
    */
-  const voltarAoTopo = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  function voltarAoTopo() { window.scrollTo({ top: 0, behavior: "smooth" }); }
 
-  return (
-    <div id="full_footer">
-      <FormularioNewsletter />
-      <Contactos />
+  useEffect(() => {
+    const btnScroll = btnScrollRef.current;
+    if (!btnScroll) return;
 
-      {showScrollBtn && (
-        <button className="scroll-to-top" onClick={voltarAoTopo} style={{ display: "block" }}>
-          <i className="fa fa-arrow-up"></i>
-        </button>
-      )}
-    </div>
+    /**
+     * * @param {event} scroll - evento de scroll
+     */
+    const handleScroll = function() {
+      atualizarVisibilidadeScroll(btnScroll, 150);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return ( // Previous html code for button transfered here instead of main script
+    <button 
+    ref={btnScrollRef}
+    className="scroll-to-top" 
+    onClick={voltarAoTopo}
+    style={{ display: "none" }}
+>   
+    <i className="fa-solid fa-arrow-up"></i>
+    </button>
   );
 }

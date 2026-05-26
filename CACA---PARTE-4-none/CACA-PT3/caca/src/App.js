@@ -4,7 +4,7 @@ import Gestao_eventos from './components/Gestao_eventos/Index';
 function App() {
   return (
     <div className="App">
-      <main style={{ minHeight: '50vh', padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
+      <main style={{ minHeight: '250vh', padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
         <h2>Centro Académico Clínico dos Açores</h2>
         <p>Área de desenvolvimento e testes.</p>
       </main>
