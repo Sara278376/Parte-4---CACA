@@ -1,0 +1,333 @@
+/* Container Layout Sections */
+.ge-secao {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.ge-secao-header {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1b3577; /* --cor-azul */
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #ffcb21; /* --cor--amarelo */
+    padding-bottom: 0.5rem;
+}
+
+.ge-page-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Card Wrapper Configurations */
+.ge-card {
+    background: #ffffff;
+    border: 2px solid #808080; /* --cor-input--cinzento */
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.ge-card h2 {
+    color: #1b3577;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+
+/* Grid Allocation for Inputs */
+.ge-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.ge-form-grid .full {
+    grid-column: span 2;
+}
+
+.ge-form-grid input,
+.ge-form-grid textarea {
+    width: 100%;
+    padding: 0.65rem;
+    font-size: 1rem;
+    border: 2px solid #808080;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.ge-form-grid input:focus,
+.ge-form-grid textarea:focus {
+    border-color: #000000;
+    outline: none;
+}
+
+.ge-form-grid textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Operational Controls Buttons */
+.ge-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.ge-btn-primary {
+    background-color: #ffcb21; /* --cor--amarelo */
+    color: #000000;
+}
+
+.ge-btn-primary:hover {
+    background-color: #e5b51d;
+}
+
+.ge-btn-secondary {
+    background-color: #1b3577; /* --cor-azul */
+    color: #ffffff;
+}
+
+.ge-btn-secondary:hover {
+    background-color: #3865d7; /* --cor-botao */
+}
+
+.ge-btn-danger {
+    background-color: #9b2c2c;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.ge-btn-danger:hover {
+    background-color: #c53030;
+}
+
+/* Feedback Notifications Structures */
+.ge-msg-feedback {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.ge-erro {
+    background-color: #fff5f5;
+    color: #c53030;
+    border: 1px solid #fed7d7;
+}
+
+.ge-sucesso {
+    background-color: #f0fff4;
+    color: #2f855a;
+    border: 1px solid #c6f6d5;
+}
+
+/* API Metric Tab Subsystems */
+#ge-painel-api {
+    margin-top: 1.5rem;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ge-api-tabs {
+    display: flex;
+    background-color: #f7fafc;
+    border-bottom: 1px solid #808080;
+}
+
+.ge-tab-btn {
+    flex: 1;
+    padding: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #4a5568;
+    transition: background-color 0.2s;
+}
+
+.ge-tab-btn:not(:last-child) {
+    border-right: 1px solid #808080;
+}
+
+.ge-tab-btn.ativo {
+    background-color: #ffffff;
+    color: #1b3577;
+}
+
+.ge-tab-conteudo {
+    display: none;
+    padding: 1.25rem;
+    background-color: #ffffff;
+}
+
+.ge-tab-conteudo.ativo {
+    display: block;
+}
+
+/* Weather Results Grid Structure */
+#ge-spinner-meteo {
+    color: #718096;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.ge-meteo-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.ge-meteo-icon {
+    font-size: 2.5rem;
+}
+
+.ge-meteo-temp {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #1b3577;
+}
+
+.ge-meteo-desc {
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.ge-meteo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.ge-meteo-item {
+    background-color: #f7fafc;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    border: 1px solid #e2e8f0;
+}
+
+.ge-meteo-item strong {
+    color: #4a5568;
+}
+
+#ge-meteo-aviso {
+    margin-top: 1rem;
+    background-color: #fffaf0;
+    border: 1px solid #feebc8;
+    color: #c05621;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Map Window Parameters */
+#ge-mapa-contentor {
+    width: 100%;
+    height: 300px;
+    background-color: #edf2f7;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+#ge-mapa-info {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #4a5568;
+}
+
+#ge-mapa-info a {
+    color: #3865d7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#ge-mapa-info a:hover {
+    text-decoration: underline;
+}
+
+/* Registered Listing Blocks Layout */
+.ge-lista-titulo {
+    color: #1b3577;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+#ge-lista-eventos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ge-card-evento {
+    background-color: #ffffff;
+    border: 2px solid #808080;
+    border-radius: 6px;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.ge-card-evento h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1b3577;
+    font-size: 1.25rem;
+}
+
+.ge-card-evento p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    color: #2d3748;
+}
+
+.ge-card-acoes {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive Scaling Overrides */
+@media (max-width: 768px) {
+    .ge-form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ge-form-grid .full {
+        grid-column: span 1;
+    }
+    
+    .ge-meteo-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ge-card-evento {
+        flex-direction: column;
+    }
+    
+    .ge-card-acoes {
+        width: 100%;
+    }
+    
+    .ge-btn-danger {
+        width: 100%;
+        text-align: center;
+    }
+}
