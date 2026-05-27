@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Académico Clínico dos Açores - CACA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <!-- Leaflet CSS (OpenStreetMap) — necessário para o módulo de Gestão de Eventos -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO-->
+
+    <header>
+        <div class="header-container">
+            <div class="logotipo-mobile">
+                <img src="imagens/logotipos/logotipo-mobile.png" alt="Logotipo CACA">
+            </div>
+            <div class="logotipo">
+                <img src="imagens/logotipos/logotipo.png" alt="Logotipo CACA">
+            </div>
+
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">☰</label>
+
+            <ul id="menuList">
+                <li><a href="#Missao">Missão</a></li>
+                <li><a href="#Investigacao">Investigação</a></li>
+                <li><a href="#Parcerias">Parcerias</a></li>
+                <li><a href="#Conquistas">Conquistas</a></li>
+                <li><a href="#Contactos">Contactos</a></li>
+                <li><a href="#Noticias">Notícias</a></li>
+                <li><a href="#Eventos">Eventos</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!--MISSÃO-->
+
+    <div class="missao">
+        <div id="Missao"></div>
+        <h2>A nossa Missão</h2>
+        <p>Ser uma instituição académica com o intuito de apoiar a realização
+            de projetos locais, promovendo a inovação e rigor a fim de inspirar
+            boa fé e confiança no setor medicinal e farmacêutico.</p>
+    </div>
+
+    <!-- OBJETIVO-->
+
+    <div class="objetivo">
+        <h2>Objetivo</h2>
+        <p>Apoiar os seus associados e servir como ponto de referência para estes,
+            com um foco em instituições clínicas e académicas locais e em alunos
+            com interesse nestas áreas.</p>
+    </div>
+
+    <!-- INVESTIGAÇÃO-->
+
+    <div id="Investigacao"></div>
+    <h1>Formação e Ensino</h1>
+
+    <div class="investigacao-main">
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <div class="investigacao-viewport">
+            <div class="investigacao-track" id="track">
+                <div class="investigacao-contentor">
+                    <img src="imagens/investigacao/AI.png" alt="Investigacao AI">
+                    <p>14 novembro 2025 - 12 dezembro 2025</p>
+                    <h2>Inteligência Artificial em Saúde</h2>
+                    <p class="saberTexto">Isto é uma descrição de exemplo, sendo esta uma notícia relacionada com um estudo feito pela UAC, nomeadamente a Faculdade de Ciências e Tecnologia.</p>
+                    <button name="investigacaoBotao">Saber Mais</button>
+                </div>
+                <div class="investigacao-contentor">
+                    <img src="imagens/investigacao/cirugia.png" alt="Cirurgia">
+                    <p>14 novembro 2025 - 12 dezembro 2025</p>
+                    <h2>Currículo de Trauma de Coluna</h2>
+                    <p class="saberTexto">Isto é uma descrição de exemplo, sendo esta uma notícia relacionada com um estudo feito pela UAC, nomeadamente a Faculdade de Ciências e Tecnologia.</p>
+                    <button name="investigacaoBotao">Saber Mais</button>
+                </div>
+                <div class="investigacao-contentor">
+                    <img src="imagens/investigacao/saudeMental.png" alt="Saude Mental em Estudantes Universitarios">
+                    <p>14 novembro 2025 - 12 dezembro 2025</p>
+                    <h2>Saúde Mental em Estudantes Universitários</h2>
+                    <p class="saberTexto">Isto é uma descrição de exemplo, sendo esta uma notícia relacionada com um estudo feito pela UAC, nomeadamente a Faculdade de Ciências e Tecnologia.</p>
+                    <button name="investigacaoBotao">Saber Mais</button>
+                </div>
+                <div class="investigacao-contentor">
+                    <img src="imagens/investigacao/primeirosSocorros.png" alt="Primeiros Socorros">
+                    <p>14 novembro 2025 - 12 dezembro 2025</p>
+                    <h2>Primeiros Socorros em Contexto Escolar</h2>
+                    <p class="saberTexto">Isto é uma descrição de exemplo, sendo esta uma notícia relacionada com um estudo feito pela UAC, nomeadamente a Faculdade de Ciências e Tecnologia.</p>
+                    <button name="investigacaoBotao">Saber Mais</button>
+                </div>
+                <div class="investigacao-contentor">
+                    <img src="imagens/investigacao/reabilitacaoFisica.png" alt="Reabilitacao Fisica">
+                    <p>14 novembro 2025 - 12 dezembro 2025</p>
+                    <h2>Reabilitação Física Pós-Cirúrgica</h2>
+                    <p class="saberTexto">Isto é uma descrição de exemplo, sendo esta uma notícia relacionada com um estudo feito pela UAC, nomeadamente a Faculdade de Ciências e Tecnologia.</p>
+                    <button name="investigacaoBotao">Saber Mais</button>
+                </div>
+            </div>
+        </div>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <!--PARCERIAS-->
+
+    <div id="Parcerias"></div>
+    <h1>Parcerias</h1>
+
+    <div class="slideshow-container">
+        <div class="mySlides fade active" style="background-image: url('imagens/parcerias/uacBackground.png');">
+            <div class="partner-logo-container">
+                <img src="imagens/parcerias/uacLogo.png" alt="Logotipo UAC">
+            </div>
+            <div class="partner-text-container">
+                <div class="text">Universidade dos Açores - Formação contínua, investigação científica e apoio a estudantes.</div>
+            </div>
+        </div>
+        <div class="mySlides fade" style="background-image: url('imagens/parcerias/espiritoSantoPaisagem.png');">
+            <div class="partner-logo-container">
+                <img src="imagens/parcerias/espiritoSantoLogo.png" alt="Logotipo Hospital Divino Espirito Santo">
+            </div>
+            <div class="partner-text-container">
+                <div class="text">Hospital Divino Espirito Santo - Referência em cuidados hospitalares e proximidade com a comunidade.</div>
+            </div>
+        </div>
+        <div class="mySlides fade" style="background-image: url('imagens/parcerias/cufPaisagem.png');">
+            <div class="partner-logo-container">
+                <img src="imagens/parcerias/cufLogo.png" alt="Logotipo CUF">
+            </div>
+            <div class="partner-text-container">
+                <div class="text">Hospital CUF - Suporte clínico especializado e excelência hospitalar.</div>
+            </div>
+        </div>
+        <div class="mySlides fade" style="background-image: url('imagens/parcerias/associacaoDoentesPaisagem.png');">
+            <div class="partner-logo-container">
+                <img src="imagens/parcerias/associacaoDoentesLogo.png" alt="Logotipo Associacao de Doentes de Dor Cronica">
+            </div>
+            <div class="partner-text-container">
+                <div class="text">Associação de Doentes de Dor Crónica - Apoio, sensibilização e melhoria da qualidade de vida dos doentes.</div>
+            </div>
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <div class="dots-container">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+
+    <!--CONQUISTAS-->
+
+    <div id="Conquistas"><h1>Conquistas</h1></div>
+    <div class="conquistas">
+        <p>Em 2026 houve um aumento geral de 30%</p>
+        <div class="conquistas-container">
+            <div class="myChart">
+                <div class="chart_types">
+                    <button onclick="loadData('utils/datainvestigacao.json', 'Numero de investigadores mensal')">Investigadores</button>
+                    <button onclick="loadData('utils/dataparceiros.json', 'Numero de parceiros mensais')">Parceiros</button>
+                    <button onclick="loadData('utils/dataprojetos.json', 'Numero de projetos mensais')">Projetos</button>
+                </div>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTÍCIAS DE SAÚDE (RSS FEED)-->
+
+    <!-- Âncora de navegação para Notícias -->
+    <div id="Noticias" class="scroll-anchor"></div>
+
+    <div class="noticias-saude">
+        <div style="text-align: center;">
+            <h2>Notícias da Saúde</h2>
+        </div>
+        <div id="feed-noticias-container">
+            <div class="loading-spinner">
+                <i class="fa fa-spinner fa-pulse"></i> A carregar novidades da OMS...
+            </div>
+        </div>
+    </div>
+
+    <!-- GESTÃO DE EVENTOS — Secção inline -->
+
+    <div id="Eventos" class="scroll-anchor"></div>
+
+    <section class="ge-secao">
+
+        <div class="ge-secao-header">
+            <span>Gestão de Eventos</span>
+        </div>
+
+        <div class="ge-page-wrap">
+
+            <!-- Formulário de Adição -->
+            <div class="ge-card">
+                <h2>Adicionar Evento</h2>
+                <div id="ge-mensagem" class="ge-msg-feedback"></div>
+
+                <div class="ge-form-grid">
+                    <input class="full" type="text"  id="ge-titulo"    placeholder="Título do evento *" required>
+                    <textarea class="full"            id="ge-descricao" placeholder="Descrição *" required></textarea>
+                    <input type="date" id="ge-data"  required>
+                    <input type="time" id="ge-hora"  required>
+                    <input class="full" type="text"  id="ge-local"     placeholder="Local (cidade, endereço) *" required>
+                </div>
+
+                <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                    <button class="ge-btn ge-btn-primary"   onclick="geGuardarEvento()">Guardar Evento</button>
+                    <button class="ge-btn ge-btn-secondary" onclick="gePesquisarLocal()">Ver Local + Meteorologia</button>
+                </div>
+
+                <!-- Painel APIs (Meteorologia + Mapa) -->
+                <div id="ge-painel-api">
+                    <div class="ge-api-tabs">
+                        <button class="ge-tab-btn ativo" onclick="geMudarTab('meteo', this)">🌤️ Meteorologia</button>
+                        <button class="ge-tab-btn"       onclick="geMudarTab('mapa',  this)">🗺️ Mapa</button>
+                    </div>
+
+                    <!-- TAB: Meteorologia -->
+                    <div id="ge-tab-meteo" class="ge-tab-conteudo ativo">
+                        <div id="ge-spinner-meteo">A carregar previsão meteorológica…</div>
+                        <div id="ge-meteo-resultado">
+                            <div class="ge-meteo-header">
+                                <div class="ge-meteo-icon" id="ge-meteo-icon">🌡️</div>
+                                <div>
+                                    <div class="ge-meteo-temp" id="ge-meteo-temp">--°C</div>
+                                    <div class="ge-meteo-desc" id="ge-meteo-desc">--</div>
+                                </div>
+                            </div>
+                            <div class="ge-meteo-grid">
+                                <div class="ge-meteo-item"><strong>Máx / Mín</strong><span id="ge-meteo-maxmin">-- / --</span></div>
+                                <div class="ge-meteo-item"><strong>Precipitação</strong><span id="ge-meteo-precip">--</span></div>
+                                <div class="ge-meteo-item"><strong>Vento</strong><span id="ge-meteo-vento">--</span></div>
+                                <div class="ge-meteo-item"><strong>Humidade</strong><span id="ge-meteo-humidade">--</span></div>
+                                <div class="ge-meteo-item"><strong>UV</strong><span id="ge-meteo-uv">--</span></div>
+                                <div class="ge-meteo-item"><strong>Nascer / Pôr Sol</strong><span id="ge-meteo-sol">--</span></div>
+                            </div>
+                            <div id="ge-meteo-aviso"></div>
+                        </div>
+                        <div id="ge-meteo-erro" style="display:none; color:#9b2c2c; font-size:13px; padding:12px 0;"></div>
+                    </div>
+
+                    <!-- TAB: Mapa -->
+                    <div id="ge-tab-mapa" class="ge-tab-conteudo">
+                        <div id="ge-mapa-contentor"></div>
+                        <div id="ge-mapa-info"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Eventos -->
+            <h2 class="ge-lista-titulo">Eventos Registados</h2>
+            <div id="ge-lista-eventos"><p style="color:#718096;">A carregar eventos…</p></div>
+        </div>
+
+    </section>
+
+    <!--NEWSLETTER-->
+
+    <div id="Newsletter">
+        <section class="newsletter">
+            <div class="newsletter-conteudo">
+                <div class="newsletter-texto">
+                    <h2>Fique Informado</h2>
+                    <p>Subscreva a nossa newsletter e receba novidades sobre
+                        formações, investigação e eventos do CACA diretamente
+                        no seu e-mail.</p>
+                </div>
+                <div class="newsletter-formulario">
+                    <div class="newsletter-feedbaxck"></div>
+                    <input
+                            id="nl-nome"
+                            type="text"
+                            placeholder="Nome *"
+                            maxlength="80"
+                            autocomplete="given-name"
+                    >
+                    <input
+                            id="nl-email"
+                            type="email"
+                            placeholder="E-mail *"
+                            maxlength="120"
+                            autocomplete="email"
+                    >
+                    <button onclick="nlSubmeter()">Subscrever</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!--FOOTER-->
+
+    <footer>
+        <div id="Contactos"></div>
+        <div class="footer-container">
+            <div class="contactos">
+                <h1>Contactos<br></h1>
+                <p>Email: 2acaca@uac.pt</p>
+                <p>Telefone: 250 620 910</p>
+                <p>Morada: Rua das Hortênsias Azuis 3, 9520-509 Lagoa</p>
+            </div>
+            <div class="email">
+                <h1>Envie Um Email<br> (*) obrigatório</h1>
+                <div class="email-conteudo">
+                    <div class="email-campos">
+                        <input id="nome" type="text" placeholder="Nome*">
+                        <input id="email" type="email" placeholder="Email*">
+                        <div class="select-box">
+                            <div class="selected-option">
+                                <div>
+                                    <span class="iconify" data-icon="flag:gb-4x3"></span>
+                                    <strong>+44</strong>
+                                </div>
+                                <input type="tel" name="tel" placeholder="Phone Number*">
+                            </div>
+                            <div class="options">
+                                <input type="text" name="search-box" placeholder="Search Country Name">
+
+                            <ol>
+                                <li class="option">
+                                    <div>
+                                        <span class="iconify" data-icon="flag:gb-4x3"></span>
+                                        <span class="country-name">United Kingdom</span>
+                                    </div>
+                                    <strong>+44</strong>
+                                </li>
+                                <li class="option">
+                                    <div>
+                                        <span class="iconify" data-icon="flag:us-4x3"></span>
+                                        <span class="country-name">United States</span>
+                                    </div>
+                                    <strong>+1</strong>
+                                </li>
+                            </ol>
+                            </div>
+                        </div>
+                            <button id="enviar" onclick="sendEmail('nome','email','mensagem','.envio-erro','.envio-sucesso')">Enviar Mensagem</button>
+                    </div>
+                    <div class="mensagem-container">
+                        <select class="quick-message" id="quickMessage" onchange="selectQuickMessage('mensagem','quickMessage')">
+                            <option value="">Quick replies</option>
+                            <option value="Gostaria de Saber se o projeto [proejeto] está disponível">Projetos de Investigação</option>
+                            <option value="Gostaria de saber quais formações são oferecidas pelo centro">Formação e Ensino</option>
+                            <option value="Estou interessado em realizar uma colobaroção com o CACA">Parcerias e Protocolos</option>
+                            <option value="Gostaria de informar-me em como posso realizar os meus estudos no CACA">Apoio ao Estudante</option>
+                        </select>
+                        <textarea id="mensagem" maxlength="450" placeholder="Escreva a sua mensagem aqui... *"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="direitos">
+        <p>© 2026 Centro Académico Clinico dos Açores. Todos os direitos reservados.<br>
+            Financiado pela Universidade dos Açores<br>
+            https://fct.uac.pt/</p>
+    </div>
+
+    <div class="envio-erro">Erro ao enviar mensagem</div>
+    <div class="envio-sucesso">Mensagem enviada com sucesso</div>
+
+    <button class="scroll-to-top"><i class="fa fa-arrow-up"></i></button>
+
+    <!-- Modal de Edição (mantido fora da secção para z-index correto) -->
+    <div id="ge-modal-overlay" onclick="geFecharModalFora(event)">
+        <div id="ge-modal">
+            <button id="ge-btn-fechar-modal" onclick="geFecharModal()" title="Fechar">✕</button>
+            <h2>✏️ Editar Evento</h2>
+            <div id="ge-modal-mensagem" class="ge-msg-feedback"></div>
+            <input type="hidden" id="ge-modal-evento-id">
+            <input type="text"   id="ge-modal-titulo"    placeholder="Título do evento *">
+            <textarea            id="ge-modal-descricao" placeholder="Descrição *"></textarea>
+            <input type="date"   id="ge-modal-data">
+            <input type="time"   id="ge-modal-hora">
+            <input type="text"   id="ge-modal-local" placeholder="Local *">
+            <div class="ge-modal-acoes">
+                <button class="ge-btn ge-btn-secondary" onclick="geFecharModal()">Cancelar</button>
+                <button class="ge-btn ge-btn-primary"   onclick="geGuardarEdicao()">💾 Guardar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- BIBLIOTECAS EXTERNAS -->
+
+    <!-- Bibliotecas gerais -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- Leaflet JS — necessário para o mapa de Gestão de Eventos -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Scripts locais: Animações -->
+    <script src="javascript/animacoes/chart.js"></script>
+    <script src="javascript/animacoes/Gsap.js"></script>
+    <script src="javascript/animacoes/logo3D.js"></script>
+
+    <!-- Scripts locais: Eventos de UI -->
+    <script src="javascript/eventos/scrollButton.js"></script>
+    <script src="javascript/eventos/investigacaoCarrosel.js"></script>
+    <script src="javascript/eventos/parceriasCarrosel.js"></script>
+    <script src="javascript/eventos/saberMaisBtn.js"></script>
+
+    <!-- Scripts locais: Formulário -->
+    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js/bundle/libphonenumber-min.js"></script>
+    <script src="javascript/formulario/form-handler.js"></script>
+    <script src="javascript/formulario/paises.js"></script>
+    <script src="javascript/formulario/telefone.js"></script>
+    <script src="javascript/formulario/newsletter.js"></script>
+
+    <!-- Script: Notícias -->
+    <script src="javascript/noticias/noticias.js"></script>
+
+    <!-- Script: Gestão de Eventos (IndexedDB + APIs meteorologia/mapa) -->
+    <script src="javascript/GestaoEvento.js"></script>
+
+</body>
+</html>

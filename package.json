@@ -1,0 +1,15 @@
+{
+  "name": "caca---parte-4-none",
+  "version": "1.0.0",
+  "description": "Trabalho realizado por: - Miguel Medeiros 2024109933  - Sara Freire 2024109364 - Tomás Moreira 2023108679",
+  "license": "ISC",
+  "author": "sara",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "three": "^0.184.0"
+  }
+}
