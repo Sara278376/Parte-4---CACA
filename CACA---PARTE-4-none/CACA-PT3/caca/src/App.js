@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <GSAP> {/* Aplicacao de animação sobre o resto dos segmentos */}
-        <main style={{ minHeight: '250vh', padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
+        <main className="missao" style={{ minHeight: '250vh', padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
           <h2>Centro Académico Clínico dos Açores</h2>
         </main>
 

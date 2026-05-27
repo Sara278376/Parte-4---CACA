@@ -1,5 +1,4 @@
-const sections = document.querySelectorAll('.missao, .objetivo, .investigacao-main, .slideshow-container, .conquistas');
-
+const sections = containerElement.querySelectorAll(  '.missao, .objetivo, .investigacao-main, .slideshow-container, .conquistas, footer, .direitos');
 // Regista o plugin ScrollTrigger do GSAP para permitir animações baseadas no scroll
 gsap.registerPlugin(ScrollTrigger);
 

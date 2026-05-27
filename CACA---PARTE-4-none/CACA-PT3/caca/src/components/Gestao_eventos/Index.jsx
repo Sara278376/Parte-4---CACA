@@ -161,6 +161,12 @@ export default function Gestao_eventos() {
       geMostrarMapa('ge-mapa-contentor', lat, lon, nome, titulo, dataEvento, hora);
       setMapaInfoTexto(`<strong>Localização encontrada:</strong> ${nome.split(',').slice(0, 3).join(',')} · <a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}" target="_blank" rel="noopener">Abrir no OpenStreetMap ↗</a>`);
 
+      setTimeout(function() {
+      if (window.ScrollTrigger) {
+        window.ScrollTrigger.refresh();
+      }
+    }, 200);
+
     } catch (err) {
       setFeedbackMsg({ texto: '❌ ' + err.message, classe: 'ge-erro' });
       setMeteoDados(prev => ({ ...prev, carregando: false }));
