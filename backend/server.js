@@ -1,17 +1,22 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import config from './src/config/index.js';
+import { connectToMongoDB } from './src/database/mongo/index.js';
 
+// express
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
+// Ligar a base dados
+await connectToMongoDB();
+
+// Teste api
 app.get('/', (req, res) => {
-  res.send('API a funcionar!');
+  res.send('API a funcionar com ES Modules e MongoDB!');
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor a correr na porta ${PORT}`);
+// listen config para port (5000)
+app.listen(config.port, () => {
+  console.log(`Servidor do CACA a correr em http://localhost:${config.port}`);
 });
