@@ -194,11 +194,15 @@ export default function Gestao_eventos() {
             )}
 
             <div className="ge-form-grid">
-              <input className="full" type="text" name="titulo" value={formDados.titulo} onChange={handleInputChange} placeholder="Título do evento *" required />
-              <textarea className="full" name="descricao" value={formDados.descricao} onChange={handleInputChange} placeholder="Descrição *" required />
-              <input type="date" name="data" value={formDados.data} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} required />
-              <input type="time" name="hora" value={formDados.hora} onChange={handleInputChange} required />
-              <input className="full" type="text" name="local" value={formDados.local} onChange={handleInputChange} placeholder="Local (cidade, endereço) *" required />
+              <input type="text" name="titulo" value={formDados.titulo} onChange={handleInputChange} placeholder="Título do evento *" required />
+              <textarea name="descricao" value={formDados.descricao} onChange={handleInputChange} placeholder="Descrição *" required />
+              
+              <div className="ge-form-row">
+                <input type="date" name="data" value={formDados.data} onChange={handleInputChange} min={new Date().toISOString().split('T')[0]} required />
+                <input type="time" name="hora" value={formDados.hora} onChange={handleInputChange} required />
+              </div>
+              
+              <input type="text" name="local" value={formDados.local} onChange={handleInputChange} placeholder="Local (cidade, endereço) *" required />
             </div>
 
             <div style={{ marginTop: '16px', display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -261,10 +265,11 @@ export default function Gestao_eventos() {
                     <h3>{ev.titulo}</h3>
                     <p>📅 {ev.data.split('-').reverse().join('/')} às {ev.hora}</p>
                     <p>📍 {ev.local}</p>
-                    {ev.descricao && <p style={{ marginTop: '6px', color: '#4a5568' }}>{ev.descricao}</p>}
+                    {ev.descricao && <p style={{ marginTop: '0.4rem', color: '#718096' }}>{ev.descricao}</p>}
                   </div>
                   <div className="ge-card-acoes">
-                    <button className="ge-btn ge-btn-danger" onClick={() => handleEliminarEvento(ev.id)}>🗑️ Remover</button>
+                    <button className="ge-btn ge-btn-warning" style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>✏️ Editar</button>
+                    <button className="ge-btn ge-btn-danger" style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }} onClick={() => handleEliminarEvento(ev.id)}>🗑️ Remover</button>
                   </div>
                 </div>
               ))
