@@ -1,0 +1,26 @@
+.missao, .objetivo {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #FFFFFF;
+}
+
+.objetivo h2, .missao h2 {
+  font-size: 3rem;
+}
+
+.objetivo p, .missao p {
+  font-size: 2rem;
+}
+
+@media (max-width: 1350px) {
+  .objetivo h2, .missao h2 {
+    font-size: 3.5rem;
+  }
+  .objetivo p, .missao p {
+    font-size: 1.7rem;
+  }
+}

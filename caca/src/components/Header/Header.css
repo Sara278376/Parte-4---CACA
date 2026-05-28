@@ -1,0 +1,35 @@
+.logotipo {
+  display: block;
+  width: 334px;
+  height: 128px;
+  overflow: hidden;
+}
+
+.logotipo canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.logotipo-mobile {
+  display: none;
+}
+
+@media (max-width: 1350px) {
+  .logotipo {
+    width: 250px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 980px) {
+  .logotipo {
+    display: none;
+  }
+
+  .logotipo-mobile {
+    display: block;
+    width: 60px;
+    height: 70px;
+  }
+}
