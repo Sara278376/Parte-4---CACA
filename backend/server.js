@@ -31,14 +31,12 @@ app.post('/api/login', (req, res) => {
       role: 'admin'
     };
 
-    const token = jwt.sign(userPayload, 'gfg_jwt_secret_key', {
+    const token = jwt.sign(userPayload, process.env.JWT_SECRET_KEY || 'gfg_jwt_secret_key', {
       expiresIn: '1h'
     });
-
     return res.json({ success: true, token: token });
   }
-
-  return res.status(401).json({ success: false, message: 'Credenciais inválidas para teste.' });
+  return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
 });
 
 
