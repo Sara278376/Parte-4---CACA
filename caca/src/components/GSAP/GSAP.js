@@ -33,13 +33,15 @@ export function initScrollAnimations(containerElement) {
    * @param {string} start - Define o ponto de ativação (quando o topo da secção chega a 100px do fundo).
    * @param {string} toggleActions - Define o comportamento (reproduz ao entrar, reverte ao sair por cima).
    */
-  sections.forEach(function(section) {
+  sections.forEach(function(section, index) {
     gsap.to(section, {
       autoAlpha: 1,
       scrollTrigger: {
         trigger: section,
         start: 'top bottom-=100',
         toggleActions: 'play none none reverse',
+        // Garante que o GSAP calcula as posições sequencialmente de cima para baixo
+        refreshPriority: sections.length - index,
       }
     });
   });
