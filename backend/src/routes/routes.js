@@ -3,6 +3,27 @@ import Evento from '../models/Evento.js';
 
 const router = express.Router();
 
+//!! Verificação de token adicionado manualmente
+function verificarToken(req, res, next) {
+  const authHeader = req.headers['gfg_token_header_key'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Acesso negado. Token não fornecido.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY || 'gfg_jwt_secret_key');
+    req.usuario = decoded;
+    next();
+  } catch (err) {
+    res.status(403).json({ error: 'Token inválido ou expirado.' });
+  }
+}
+
+
+
+
+
 // Listar todos os eventos
 router.get('/', async (req, res) => {
   try {
@@ -14,7 +35,7 @@ router.get('/', async (req, res) => {
 });
 
 // Guardar evento
-router.post('/', async (req, res) => {
+router.post('/', verificarToken, async (req, res) => {
   try {
     const novoEvento = new Evento(req.body);
     await novoEvento.save();
@@ -25,7 +46,7 @@ router.post('/', async (req, res) => {
 });
 
 // Remover evento
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verificarToken, async (req, res) => {
   try {
     await Evento.findOneAndDelete({ idLocal: req.params.id });
     res.json({ message: "Removido com sucesso" });
@@ -35,7 +56,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Atualizar evento
-router.put('/:id', async (req, res) => {
+router.put('/:id', verificarToken, async (req, res) => {
   try {
     const atualizado = await Evento.findOneAndUpdate(
       { idLocal: req.params.id },

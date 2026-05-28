@@ -20,6 +20,30 @@ app.get('/', (req, res) => {
   res.send('API a funcionar com ES Modules e MongoDB!');
 });
 
+//!! MANUAL Token testing with JWT, remove when user login is configured
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+
+  if (email === 'test@caca.pt' && password === 'caca2026') {
+    const userPayload = {
+      id: 999,
+      email: email,
+      role: 'admin'
+    };
+
+    const token = jwt.sign(userPayload, 'gfg_jwt_secret_key', {
+      expiresIn: '1h'
+    });
+
+    return res.json({ success: true, token: token });
+  }
+
+  return res.status(401).json({ success: false, message: 'Credenciais inválidas para teste.' });
+});
+
+
+
+
 // listen config para port (5000)
 app.listen(config.port, () => {
   console.log(`Servidor do CACA a correr em http://localhost:${config.port}`);
