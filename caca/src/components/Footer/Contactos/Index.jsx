@@ -25,6 +25,9 @@ function validatePhone(phone) {
 }
 
 export default function Contactos() {
+ /**
+ * Função para gerar o formulário de contacto e fornecer informação pré preparara, selecionável pelo utilizador
+ */
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedPrefixo, setSelectedPrefixo] = useState('+44');
   const [selectedFlag, setSelectedFlag] = useState('flag:gb-4x3');

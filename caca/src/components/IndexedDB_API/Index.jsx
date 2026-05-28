@@ -14,6 +14,9 @@ import {
 } from './indexeddb.js';
 
 export default function Gestao_eventos() {
+/**
+ * Permite a listagem, criação, atualização e remoção de eventos
+ */
   const [eventos, setEventos] = useState([]);
   const [activeTab, setActiveTab] = useState('meteo');
   const [painelVisivel, setPainelVisivel] = useState(false);
@@ -104,6 +107,9 @@ export default function Gestao_eventos() {
     }
   }
 
+  /**
+  * Filtra e pesquisa eventospor localização geográfica
+  */
   async function handlePesquisarLocal() {
     const { local, data: dataEvento, hora, titulo } = formDados;
 
@@ -177,6 +183,10 @@ export default function Gestao_eventos() {
   }
 
   async function handleEliminarEvento(id) {
+  /**
+  * Remove um evento específico
+  * @param {string|number} id - Identificador do evento a ser eliminado
+  */
     if (!window.confirm('Tens a certeza que queres remover este evento?')) return;
     await geRemoverEvento(id);
     setFeedbackMsg({ texto: 'Evento removido.', classe: 'ge-sucesso' });

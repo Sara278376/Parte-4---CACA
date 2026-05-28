@@ -3,6 +3,9 @@ const NL_DB_VERSAO  = 1;
 const NL_STORE      = 'subscritores';
 let nlDb            = null;
 
+/**
+ * Abre a ligação à base de dados IndexedDB para newsletter, cria o tabela
+ */
 export function nlAbrirDB() {
     return new Promise((resolve, reject) => {
         if (nlDb) return resolve(nlDb);
@@ -24,6 +27,11 @@ export function nlAbrirDB() {
     });
 }
 
+/**
+ * Função para gerir transações
+ * @param {string} mode - modo da transação (read/write)
+ * @param {Function} fn - Função que recebe a object store e devolve o pedido correspondente
+ */
 function nlIdbOp(mode, fn) {
     return nlAbrirDB().then(() => {
         return new Promise((resolve, reject) => {
@@ -35,10 +43,18 @@ function nlIdbOp(mode, fn) {
     });
 }
 
+/**
+ * Adiciona um novo subscritor à base de dados local da newsletter.
+ * @param {Object} subscritor - objeto com os dados do subscritor
+ */
 export function nlAdicionarSubscritor(subscritor) {
     return nlIdbOp('readwrite', store => store.add(subscritor));
 }
 
+/**
+ * Verifica se um determinado endereço de email já se encontra registado
+ * @param {string} email - endereço de email a verificar
+ */
 export function nlEmailExiste(email) {
     return nlAbrirDB().then(() => {
         return new Promise((resolve, reject) => {
