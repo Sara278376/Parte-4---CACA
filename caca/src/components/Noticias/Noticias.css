@@ -1,0 +1,29 @@
+.noticias-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+.noticia-card {
+  background: #fff;
+  border-left: 5px solid #1B3577;
+  margin-bottom: 15px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0 4px 4px 0;
+}
+
+.noticia-card h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.noticia-card p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: center;
+}

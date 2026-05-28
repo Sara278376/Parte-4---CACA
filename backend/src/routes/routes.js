@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import Evento from '../models/Evento.js'; // Ajusta o caminho conforme a tua estrutura real
+import Evento from '../models/Evento.js';
 
 const router = express.Router();
 

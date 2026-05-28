@@ -6,7 +6,9 @@ import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Missao from './components/Missao/Missao';
 import FormacaoEnsino from './components/FormacaoEnsino/FormacaoEnsino';
-import Auth from './components/Auth/Auth'; // Import do componente da Sara
+import Auth from './components/Auth/Auth';
+import Parcerias from './components/Parcerias/Index';
+import Noticias from './components/Noticias/Index';
 
 import './App.css';
 
@@ -14,13 +16,13 @@ function App() {
   // Estado para o Modal
   const [modalAberto, setModalAberto] = useState(false);
 
-  // Estado para o Utilizador (mantém sessão após reload)
+  // Estado para o utilizador
   const [utilizador, setUtilizador] = useState(() => {
     const guardado = localStorage.getItem('utilizador');
     return guardado ? JSON.parse(guardado) : null;
   });
 
-  // Atualiza estado após login bem-sucedido
+  // Atualiza estado após login
   function handleLogin(user) {
     setUtilizador(user);
     setModalAberto(false);
@@ -57,15 +59,17 @@ function App() {
       </header>
 
       <GSAP> 
-        <main>
-          <Missao />
-          <FormacaoEnsino />
-          <Gestao_eventos />
-        </main>
-        <Footer />
+      <main>
+      <Missao />
+      <FormacaoEnsino />
+      <Gestao_eventos />
+      <Parcerias />
+      <Noticias />
+      </main>
+      <Footer />
       </GSAP>
 
-      {/* Modal de login/registo — renderizado fora do GSAP para evitar conflitos de animação */}
+      {/* Modal de login/registo*/}
       {modalAberto && <Auth aoFechar={handleLogin} />}
     </div>
   );
