@@ -6,11 +6,12 @@
 //   PUT  /api/auth/perfil   — editar perfil (requer token)
 // ============================================================
 
-const express = require('express');
+import express from 'express';
+import bcrypt from 'bcryptjs'; // Para fazer hash das passwords
+import jwt from 'jsonwebtoken'; // Para gerar e verificar tokens JWT
+import User from '../models/User.js';
+
 const router = express.Router();
-const bcrypt = require('bcryptjs');   // Para fazer hash das passwords
-const jwt = require('jsonwebtoken'); // Para gerar e verificar tokens JWT
-const User = require('../models/User');
 
 /**
  * Middleware de autenticação via JWT.
@@ -99,7 +100,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(
       { id: utilizador._id, email: utilizador.email, role: utilizador.role },
       process.env.JWT_SECRET,
-      { expiresIn: '2h' }
+      { expiresIn: '2h' } // Meter a 10s para testes jwt ou 2h para normal
     );
 
     // Devolve o token e os dados básicos do utilizador (sem password)
@@ -162,5 +163,5 @@ router.put('/perfil', autenticar, async (req, res) => {
   }
 });
 
-module.exports = router;
-module.exports.autenticar = autenticar; // Exporta também o middleware para uso noutras rotas
+export default router;
+export { autenticar }; // Exporta também o middleware para uso noutras rotas

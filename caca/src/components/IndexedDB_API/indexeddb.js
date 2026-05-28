@@ -56,6 +56,14 @@ const GE_DB_VERSAO  = 1;
 const GE_STORE      = 'eventos';
 let geDb            = null;
 
+function getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        'gfg_token_header_key': token ? `Bearer ${token}` : ''
+    };
+}
+
 export function abrirDB() {
     return new Promise((resolve, reject) => {
         if (geDb) return resolve(geDb);
@@ -86,10 +94,12 @@ function geIdbOp(mode, fn) {
 
 // Operações com bases de dados
 
+
+
 export async function geListarEventos() {
     /**
-   * Lista os eventos existentes na base de dados mongo, ou na base dados local se mongo for inacessivel
-   */
+    * Lista os eventos existentes na base de dados mongo, ou na base dados local se mongo for inacessivel
+    */
     try {
         // mongoDB integration
         const res = await fetch('http://localhost:5000/api/eventos');
@@ -116,19 +126,18 @@ export async function geListarEventos() {
     return geIdbOp('readonly', store => store.getAll());
 }
 
-
 export async function geAdicionarEvento(evento) {
    /**
-   * Adiciona eventos na base de dados local, e em mongoDB
-   * @param {Object} evento - Objecto que contém os dados do formulario
-   */
+    * Adiciona eventos na base de dados local, e em mongoDB
+    * @param {Object} evento - Objecto que contém os dados do formulario
+    */
     const idGeradoLocal = await geIdbOp('readwrite', store => store.add(evento));
     
     // mongoDB integration
     try {
         await fetch('http://localhost:5000/api/eventos', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: getAuthHeaders(),
             body: JSON.stringify({ idLocal: idGeradoLocal, ...evento })
         });
     } catch (err) {
@@ -140,15 +149,16 @@ export async function geAdicionarEvento(evento) {
 
 export async function geRemoverEvento(id) {
     /**
-   * Remove eventos aa base de dados local, e em mongoDB
-   * @param {number} id - identifica evento a ser removido
-   */
+    * Remove eventos aa base de dados local, e em mongoDB
+    * @param {number} id - identifica evento a ser removido
+    */
     const resultadoLocal = await geIdbOp('readwrite', store => store.delete(id));
     
     // mongoDB integration
     try {
         await fetch(`http://localhost:5000/api/eventos/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: getAuthHeaders()
         });
     } catch (err) {
         console.error('No access to mongo', err);
@@ -168,7 +178,7 @@ export async function geAtualizarEvento(evento) {
     try {
         await fetch(`http://localhost:5000/api/eventos/${evento.id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: getAuthHeaders(),
             body: JSON.stringify(evento)
         });
     } catch (err) {

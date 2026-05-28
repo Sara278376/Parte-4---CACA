@@ -27,10 +27,10 @@ ul {
   display: flex;
   list-style: none;
   font-size: 1.5rem;
-  gap: 4rem;
+  gap: 1.5rem;
   margin-left: auto;
   padding-right: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 li {
@@ -40,6 +40,7 @@ li {
 li a {
   text-decoration: none;
   color: #000000;
+  white-space: nowrap;
 }
 
 li a::before {
@@ -104,4 +105,8 @@ li a:hover::before {
     font-size: 1.4rem;
     gap: 1rem;
   }
+}
+
+li > a {
+  white-space: nowrap !important;
 }

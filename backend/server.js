@@ -3,7 +3,7 @@ import cors from 'cors';
 import config from './src/config/index.js';
 import { connectToMongoDB } from './src/database/mongo/index.js';
 import eventoRoutes from './src/routes/routes.js';
-import authRoutes from './src/routes/auth.js'; // Import das rotas reais da colega
+import authRoutes from './src/routes/auth.js'; 
 
 // express
 const app = express();
