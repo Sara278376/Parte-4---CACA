@@ -1,5 +1,6 @@
 import express from 'express';
 import Evento from '../models/Evento.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ function verificarToken(req, res, next) {
 
 
 
-
+//##!! Trocar funções comentadas pelas utilizadas para voltar a implementar verificação de toknes
 
 // Listar todos os eventos
 router.get('/', async (req, res) => {
@@ -34,8 +35,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Guardar evento
-router.post('/', verificarToken, async (req, res) => {
+//router.post('/', verificarToken, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const novoEvento = new Evento(req.body);
     await novoEvento.save();
@@ -46,7 +49,8 @@ router.post('/', verificarToken, async (req, res) => {
 });
 
 // Remover evento
-router.delete('/:id', verificarToken, async (req, res) => {
+//router.delete('/:id', verificarToken, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     await Evento.findOneAndDelete({ idLocal: req.params.id });
     res.json({ message: "Removido com sucesso" });
@@ -56,7 +60,8 @@ router.delete('/:id', verificarToken, async (req, res) => {
 });
 
 // Atualizar evento
-router.put('/:id', verificarToken, async (req, res) => {
+//router.put('/:id', verificarToken, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const atualizado = await Evento.findOneAndUpdate(
       { idLocal: req.params.id },
