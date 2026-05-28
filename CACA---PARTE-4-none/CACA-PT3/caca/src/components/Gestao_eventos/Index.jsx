@@ -45,6 +45,16 @@ export default function Gestao_eventos() {
 
   const [mapaInfoTexto, setMapaInfoTexto] = useState('');
 
+  const [modalAberta, setModalAberta] = useState(false);
+  const [modalFormDados, setModalFormDados] = useState({
+    id: '',
+    titulo: '',
+    descricao: '',
+    data: '',
+    hora: '',
+    local: ''
+  });
+
   useEffect(() => {
     abrirDB()
       .then(() => {
@@ -162,10 +172,10 @@ export default function Gestao_eventos() {
       setMapaInfoTexto(`<strong>Localização encontrada:</strong> ${nome.split(',').slice(0, 3).join(',')} · <a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}" target="_blank" rel="noopener">Abrir no OpenStreetMap ↗</a>`);
 
       setTimeout(function() {
-      if (window.ScrollTrigger) {
-        window.ScrollTrigger.refresh();
-      }
-    }, 200);
+        if (window.ScrollTrigger) {
+          window.ScrollTrigger.refresh();
+        }
+      }, 200);
 
     } catch (err) {
       setFeedbackMsg({ texto: '❌ ' + err.message, classe: 'ge-erro' });
@@ -177,6 +187,41 @@ export default function Gestao_eventos() {
     if (!window.confirm('Tens a certeza que queres remover este evento?')) return;
     await geRemoverEvento(id);
     setFeedbackMsg({ texto: 'Evento removido.', classe: 'ge-sucesso' });
+    carregarERenderizarEventos();
+    setTimeout(() => setFeedbackMsg({ texto: '', classe: '' }), 3000);
+  };
+
+  const handleAbrirEditarModal = (evento) => {
+    setModalFormDados({
+      id: evento.id,
+      titulo: evento.titulo,
+      descricao: evento.descricao,
+      data: evento.data,
+      hora: evento.hora,
+      local: evento.local
+    });
+    setModalAberta(true);
+  };
+
+  const handleModalInputChange = (e) => {
+    const { name, value } = e.target;
+    setModalFormDados(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleGuardarEdicao = async (e) => {
+    e.preventDefault();
+    const { id, titulo, descricao, data, hora, local } = modalFormDados;
+
+    if (!titulo || !descricao || !data || !hora || !local) {
+      setFeedbackMsg({ texto: 'Preenche todos os campos obrigatórios na edição.', classe: 'ge-erro' });
+      return;
+    }
+
+    const { geAtualizarEvento } = await import('../IndexedDB_API/indexeddb.js');
+    await geAtualizarEvento({ id, titulo, descricao, data, hora, local });
+    
+    setModalAberta(false);
+    setFeedbackMsg({ texto: '✅ Alterações guardadas com sucesso!', classe: 'ge-sucesso' });
     carregarERenderizarEventos();
     setTimeout(() => setFeedbackMsg({ texto: '', classe: '' }), 3000);
   };
@@ -274,7 +319,7 @@ export default function Gestao_eventos() {
                     {ev.descricao && <p style={{ marginTop: '0.4rem', color: '#718096' }}>{ev.descricao}</p>}
                   </div>
                   <div className="ge-card-acoes">
-                    <button className="ge-btn ge-btn-warning" style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>✏️ Editar</button>
+                    <button className="ge-btn ge-btn-warning" style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }} onClick={() => handleAbrirEditarModal(ev)}>✏️ Editar</button>
                     <button className="ge-btn ge-btn-danger" style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }} onClick={() => handleEliminarEvento(ev.id)}>🗑️ Remover</button>
                   </div>
                 </div>
@@ -283,6 +328,26 @@ export default function Gestao_eventos() {
           </div>
         </div>
       </section>
+      
+      {modalAberta && (
+        <div id="ge-modal-overlay" className="aberto" onClick={(e) => { if(e.target.id === 'ge-modal-overlay') setModalAberta(false); }}>
+          <div id="ge-modal">
+            <button id="ge-btn-fechar-modal" onClick={() => setModalAberta(false)} title="Fechar">✕</button>
+            <h2>✏️ Editar Evento</h2>
+            <form onSubmit={handleGuardarEdicao}>
+              <input type="text" name="titulo" value={modalFormDados.titulo} onChange={handleModalInputChange} placeholder="Título do evento *" required />
+              <textarea name="descricao" value={modalFormDados.descricao} onChange={handleModalInputChange} placeholder="Descrição *" required />
+              <input type="date" name="data" value={modalFormDados.data} onChange={handleModalInputChange} required />
+              <input type="time" name="hora" value={modalFormDados.hora} onChange={handleModalInputChange} required />
+              <input type="text" name="local" value={modalFormDados.local} onChange={handleModalInputChange} placeholder="Local *" required />
+              <div className="ge-modal-acoes">
+                <button type="button" className="ge-btn ge-btn-secondary" onClick={() => setModalAberta(false)}>Cancelar</button>
+                <button type="submit" className="ge-btn ge-btn-primary">💾 Guardar Alterações</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import config from './src/config/index.js';
 import { connectToMongoDB } from './src/database/mongo/index.js';
+import eventoRoutes from './src/routes/routes.js';
 
 // express
 const app = express();
@@ -10,6 +11,9 @@ app.use(express.json());
 
 // Ligar a base dados
 await connectToMongoDB();
+
+// Rotas da API
+app.use('/api/eventos', eventoRoutes);
 
 // Teste api
 app.get('/', (req, res) => {

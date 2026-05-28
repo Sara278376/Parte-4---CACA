@@ -2,21 +2,21 @@ import config from '../../config/index.js';
 import mongoose from 'mongoose';
 
 async function connectToMongoDB() {
-  console.log('A ligar à base de dados MongoDB do CACA...');
+  console.log('Connecting to MongoDB...');
   
   mongoose.connection.on('connected', () => {
-    console.log('Conexão ao MongoDB estabelecida com sucesso.');
+    console.log('Connected to MongoDB');
   });
   
   mongoose.connection.on('error', (err) => {
-    console.error('Erro crítico na ligação ao MongoDB:', err);
+    console.error('Error connecting to MongoDB:', err);
   });
   
   return mongoose.connect(config.mongodbUri);
 }
 
 function disconnectFromMongoDB() {
-  console.log('A desligar do MongoDB...');
+  console.log('Disconnecting from MongoDB...');
   mongoose.disconnect();
 }
 

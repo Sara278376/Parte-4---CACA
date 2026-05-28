@@ -85,18 +85,99 @@ function geIdbOp(mode, fn) {
 }
 
 // Operações com bases de dados
-export function geListarEventos() {
+
+export async function geListarEventos() {
+    /**
+   * Lista os eventos existentes na base de dados mongo, ou na base dados local se mongo for inacessivel
+   */
+    try {
+        // mongoDB integration
+        const res = await fetch('http://localhost:5000/api/eventos');
+        if (res.ok) {
+            const eventosMongo = await res.json();
+            
+            await abrirDB();
+            await new Promise((resolve, reject) => {
+                const tx = geDb.transaction(GE_STORE, 'readwrite');
+                const store = tx.objectStore(GE_STORE);
+                store.clear();
+                eventosMongo.forEach(ev => {
+                    store.add({ id: ev.idLocal || ev._id, ...ev });
+                });
+                tx.oncomplete = () => resolve();
+                tx.onerror = () => reject(tx.error);
+            });
+
+            return eventosMongo.map(ev => ({ id: ev.idLocal || ev._id, ...ev }));
+        }
+    } catch (err) {
+        console.warn('No access to mongo', err);
+    }
     return geIdbOp('readonly', store => store.getAll());
 }
-export function geAdicionarEvento(evento) {
-    return geIdbOp('readwrite', store => store.add(evento));
+
+
+export async function geAdicionarEvento(evento) {
+   /**
+   * Adiciona eventos na base de dados local, e em mongoDB
+   * @param {Object} evento - Objecto que contém os dados do formulario
+   */
+    const idGeradoLocal = await geIdbOp('readwrite', store => store.add(evento));
+    
+    // mongoDB integration
+    try {
+        await fetch('http://localhost:5000/api/eventos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idLocal: idGeradoLocal, ...evento })
+        });
+    } catch (err) {
+        console.error('No access to mongo', err);
+    }
+    
+    return idGeradoLocal;
 }
-export function geRemoverEvento(id) {
-    return geIdbOp('readwrite', store => store.delete(id));
+
+export async function geRemoverEvento(id) {
+    /**
+   * Remove eventos aa base de dados local, e em mongoDB
+   * @param {number} id - identifica evento a ser removido
+   */
+    const resultadoLocal = await geIdbOp('readwrite', store => store.delete(id));
+    
+    // mongoDB integration
+    try {
+        await fetch(`http://localhost:5000/api/eventos/${id}`, {
+            method: 'DELETE'
+        });
+    } catch (err) {
+        console.error('No access to mongo', err);
+    }
+    
+    return resultadoLocal;
 }
-export function geAtualizarEvento(evento) {
-    return geIdbOp('readwrite', store => store.put(evento));
+
+export async function geAtualizarEvento(evento) {
+   /**
+    * Atualiza um evento na base de dados local, e em mongoDB
+    * @param {Object} evento - Objeto que contém os dados modificados do evento
+    */
+    const resultadoLocal = await geIdbOp('readwrite', store => store.put(evento));
+    
+    // mongoDB integration
+    try {
+        await fetch(`http://localhost:5000/api/eventos/${evento.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(evento)
+        });
+    } catch (err) {
+        console.error('No access to mongo', err);
+    }
+    
+    return resultadoLocal;
 }
+
 export function geObterEvento(id) {
     return geIdbOp('readonly', store => store.get(id));
 }
