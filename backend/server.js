@@ -3,6 +3,7 @@ import cors from 'cors';
 import config from './src/config/index.js';
 import { connectToMongoDB } from './src/database/mongo/index.js';
 import eventoRoutes from './src/routes/routes.js';
+import jwt from 'jsonwebtoken';
 
 // express
 const app = express();
