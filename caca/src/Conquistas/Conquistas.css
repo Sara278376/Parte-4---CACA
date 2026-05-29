@@ -1,0 +1,116 @@
+#Conquistas h1 {
+  font-size: 3rem;
+  margin: 2rem 6rem;
+}
+
+.conquistas {
+  display: flex;
+  background-color: #1B3577;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.conquistas p {
+  color: #FFFFFF;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.conquistas-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  width: 90%;
+}
+
+.conquistas-container button {
+  color: #FFFFFF;
+  border: none;
+  background-color: #1B3577;
+  font-size: clamp(.8rem, 2.6vw, 2.6rem);
+  padding-inline: .5em;
+  margin: 1rem 1rem 1rem 0;
+  cursor: pointer;
+  font-family: 'Kadwa', serif;
+}
+
+.conquistas-container button:hover,
+.conquistas-container button.ativo {
+  background-color: #3865D7;
+  transform: scale(1.1);
+  transition: all .2s ease;
+}
+
+.conquistas-grafico-wrap {
+  background-color: white;
+  max-height: 30rem;
+  padding: 10px;
+}
+
+/* Tablet */
+@media (max-width: 980px) {
+  .conquistas {
+    padding: 1.5rem 0.75rem;
+    margin: 0.5rem 0;
+  }
+
+  .conquistas p {
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+  }
+
+  .conquistas-container {
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    overflow-x: auto;
+  }
+
+  .chart_types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .conquistas-container button {
+    font-size: clamp(0.7rem, 3.5vw, 1rem);
+    padding: 0.4rem 0.6rem;
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .conquistas-grafico-wrap {
+    max-height: 55vw;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 600px) {
+  .conquistas p {
+    font-size: 1rem;
+  }
+
+  .conquistas-container button {
+    font-size: clamp(0.65rem, 3vw, 0.9rem);
+    padding: 0.35rem 0.5rem;
+  }
+
+  .conquistas-grafico-wrap {
+    max-height: 60vw;
+  }
+
+  #Conquistas h1 {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+  }
+}
